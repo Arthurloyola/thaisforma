@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Thaís Maromba</title>
+    <meta name="description" content="Os treinos da Thaís, organizados e sempre à mão." />
+    <meta name="theme-color" content="#FBF6F6" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Thaís Maromba" />
+    <style>
+      /* Splash exibido enquanto o app carrega o armazenamento local */
+      #splash {
+        position: fixed; inset: 0; z-index: 1000;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+        background: #5A1F3A; color: #F3E3DF;
+        font-family: Georgia, 'Times New Roman', serif;
+        transition: opacity .45s ease, visibility .45s ease;
+      }
+      #splash.is-hidden { opacity: 0; visibility: hidden; }
+      #splash svg { width: 84px; height: 84px; animation: splash-breathe 1.6s ease-in-out infinite; }
+      #splash span { font-size: 26px; font-style: italic; letter-spacing: .01em; }
+      @keyframes splash-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+      @media (prefers-reduced-motion: reduce) { #splash svg { animation: none; } }
+    </style>
+  </head>
+  <body>
+    <div id="splash" aria-hidden="true">
+      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <rect x="84" y="158" width="24" height="64" rx="12" fill="#C06C84"/>
+        <rect x="104" y="136" width="40" height="108" rx="18" fill="#C06C84"/>
+        <rect x="404" y="158" width="24" height="64" rx="12" fill="#C06C84"/>
+        <rect x="368" y="136" width="40" height="108" rx="18" fill="#C06C84"/>
+        <rect x="136" y="175" width="240" height="30" rx="15" fill="#F3E3DF"/>
+        <rect x="239" y="190" width="34" height="196" rx="17" fill="#F3E3DF"/>
+      </svg>
+      <span>Thaís Maromba</span>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

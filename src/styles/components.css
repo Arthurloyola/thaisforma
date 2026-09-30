@@ -1,0 +1,248 @@
+/* ---------- Wordmark ---------- */
+.wordmark { display: inline-flex; align-items: center; gap: 9px; color: var(--wine); }
+.wordmark__mark { width: 30px; height: 23px; }
+.wordmark__text { font-family: var(--font-display); font-style: italic; font-weight: 480; font-size: 20px; letter-spacing: -0.01em; }
+
+/* ---------- Navegação inferior ---------- */
+.bottom-nav {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  padding: 0 12px calc(10px + var(--safe-bottom));
+  pointer-events: none;
+}
+.bottom-nav__inner {
+  max-width: 480px; margin: 0 auto; height: var(--nav-h);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: rgba(255, 255, 255, .92);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border: 1px solid var(--line); border-radius: 24px;
+  box-shadow: var(--shadow-float);
+  pointer-events: auto;
+}
+.bottom-nav__item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  color: var(--ink-faint); text-decoration: none;
+  font-size: 11.5px; font-weight: 700;
+  transition: color .2s;
+}
+.bottom-nav__item svg { width: 23px; height: 23px; transition: transform .25s var(--ease); }
+.bottom-nav__item.is-active { color: var(--wine); }
+.bottom-nav__item.is-active svg { transform: translateY(-1px); stroke-width: 2.4; }
+
+/* ---------- Anel de progresso ---------- */
+.ring { position: relative; flex: none; }
+.ring__track { stroke: var(--blush); }
+.ring__value { stroke: var(--wine); transition: stroke-dashoffset .6s var(--ease); }
+.ring--dark .ring__track { stroke: rgba(243, 227, 223, .18); }
+.ring--dark .ring__value { stroke: var(--blush); }
+.ring__label {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.05;
+}
+.ring__label strong { font-family: var(--font-display); font-size: 34px; font-weight: 520; color: var(--wine); }
+.ring__label span { font-size: var(--fs-xs); color: var(--ink-soft); font-weight: 600; }
+
+/* ---------- Imagem de exercício ---------- */
+.ex-image {
+  position: relative; display: block; width: 100%; padding: 0; border: 0;
+  aspect-ratio: 4 / 3; overflow: hidden; background: var(--blush);
+}
+.ex-image img { width: 100%; height: 100%; object-fit: cover; }
+.ex-image--empty {
+  display: grid; place-items: center;
+  background:
+    radial-gradient(120% 90% at 85% 10%, var(--lilac-soft) 0%, transparent 60%),
+    var(--blush);
+}
+.ex-image--empty span {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(72px, 26vw, 120px); line-height: 1; color: var(--nude);
+}
+
+/* ---------- Seletor de imagem ---------- */
+.image-picker { display: flex; flex-direction: column; gap: 12px; }
+.image-picker__preview { border-radius: var(--r-inner); }
+.image-picker__actions { display: flex; gap: 8px; align-items: center; }
+.image-picker__actions .btn { flex: 1; }
+.image-picker .is-busy { opacity: .7; pointer-events: none; }
+
+/* ---------- Bottom sheet ---------- */
+.sheet-layer {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(43, 22, 33, .38);
+  animation: fade-in .2s ease;
+}
+.sheet {
+  width: 100%; max-width: 520px;
+  padding: 10px var(--gutter) calc(20px + var(--safe-bottom));
+  background: var(--white); border-radius: 28px 28px 0 0;
+  animation: sheet-up .32s var(--ease);
+}
+.sheet__handle { width: 44px; height: 5px; border-radius: 3px; background: var(--line); margin: 0 auto 16px; }
+.sheet__title { font-size: var(--fs-lg); margin-bottom: 8px; padding: 0 4px; }
+.sheet__message { color: var(--ink-soft); font-size: var(--fs-sm); padding: 0 4px; margin-bottom: 20px; }
+.sheet__buttons { display: flex; flex-direction: column; gap: 6px; }
+.sheet-action {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  min-height: 58px; padding: 0 12px;
+  border: 0; border-radius: var(--r-inner); background: none;
+  font-size: var(--fs-md); font-weight: 650; color: var(--ink); text-align: left;
+}
+.sheet-action svg { width: 22px; height: 22px; color: var(--wine); }
+.sheet-action:active { background: var(--blush); }
+.sheet-action--danger, .sheet-action--danger svg { color: var(--danger); }
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Toast ---------- */
+.toast-region {
+  position: fixed; left: 0; right: 0; z-index: 120; pointer-events: none;
+  bottom: calc(var(--nav-h) + var(--safe-bottom) + 24px);
+  display: flex; justify-content: center; padding: 0 var(--gutter);
+}
+.toast {
+  max-width: 420px; padding: 14px 20px; border-radius: 18px;
+  background: var(--wine); color: var(--blush);
+  font-weight: 650; font-size: var(--fs-sm); text-align: center;
+  box-shadow: var(--shadow-float);
+  animation: toast-in .35s var(--ease);
+}
+.toast--error { background: var(--ink); }
+@keyframes toast-in { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  position: fixed; inset: 0; z-index: 110;
+  display: grid; place-items: center; padding: 20px;
+  background: rgba(30, 12, 22, .92);
+  animation: fade-in .2s ease;
+}
+.lightbox img { max-height: 86dvh; border-radius: 18px; }
+.lightbox__close {
+  position: absolute; right: 14px; top: calc(env(safe-area-inset-top, 0px) + 12px);
+  background: rgba(255, 255, 255, .14); color: #fff;
+}
+
+/* ---------- Card de treino (lista) ---------- */
+.workout-card {
+  position: relative; display: flex; align-items: center;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-card);
+}
+.workout-card__link {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 16px;
+  padding: 16px 4px 16px 16px; text-decoration: none; color: inherit;
+}
+.workout-card__link:active { opacity: .7; }
+.workout-card__tag {
+  flex: none; width: 58px; height: 58px; display: grid; place-items: center;
+  border-radius: 18px; background: var(--blush); color: var(--wine);
+  font-family: var(--font-display); font-style: italic; font-size: 30px; font-weight: 450;
+}
+.workout-card__body { display: flex; flex-direction: column; min-width: 0; gap: 2px; }
+.workout-card__name { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 520; line-height: 1.2; }
+.workout-card__meta { font-size: var(--fs-xs); color: var(--ink-soft); }
+.workout-card__status { font-size: var(--fs-xs); color: var(--rose-deep); font-weight: 750; margin-top: 2px; }
+.workout-card__more { margin-right: 8px; color: var(--ink-soft); }
+
+/* ---------- Editor de exercício ---------- */
+.ex-editor {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-card);
+  scroll-margin-top: calc(var(--topbar-h) + 12px);
+  transition: border-color .2s, box-shadow .2s;
+}
+.ex-editor.is-open { border-color: var(--nude); box-shadow: var(--shadow-soft); }
+.ex-editor.has-error { border-color: var(--danger); }
+.ex-editor__head { display: flex; align-items: center; padding: 6px 6px 6px 0; }
+.ex-editor__toggle {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px;
+  padding: 10px 6px 10px 14px; border: 0; background: none; text-align: left;
+}
+.ex-editor__index {
+  flex: none; width: 32px; height: 32px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--lilac-soft); color: var(--wine);
+  font-weight: 800; font-size: var(--fs-xs);
+}
+.ex-editor__summary { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.ex-editor__name { font-weight: 750; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ex-editor__meta { font-size: var(--fs-xs); color: var(--ink-soft); }
+.ex-editor__chevron { flex: none; width: 20px; color: var(--ink-faint); transition: transform .25s var(--ease); }
+.ex-editor.is-open .ex-editor__chevron { transform: rotate(180deg); }
+.ex-editor__order { display: flex; }
+.ex-editor__order .icon-btn { width: 42px; height: 42px; }
+.ex-editor__body {
+  display: flex; flex-direction: column; gap: 18px;
+  padding: 8px 16px 16px; border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.ex-editor__remove { color: var(--danger); align-self: center; }
+.input-with-action { display: flex; gap: 8px; align-items: center; }
+.input-with-action .icon-btn { width: var(--tap); height: var(--tap); border-radius: var(--r-field); }
+
+/* ---------- Card do modo treino ---------- */
+.train-card {
+  position: relative; overflow: hidden;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--r-hero);
+  scroll-margin-top: calc(var(--topbar-h) + 70px);
+  transition: border-color .3s, background-color .3s;
+}
+.train-card__media { position: relative; }
+.train-card__image { aspect-ratio: 5 / 4; }
+.train-card__image img { transition: filter .4s, opacity .4s; }
+.train-card__index {
+  position: absolute; left: 14px; top: 14px;
+  min-width: 40px; height: 40px; padding: 0 12px;
+  display: grid; place-items: center; border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, .94); color: var(--wine);
+  font-weight: 800; box-shadow: 0 4px 14px -6px rgba(67, 21, 42, .35);
+  transition: background-color .3s, color .3s;
+}
+.train-card__index svg { width: 20px; height: 20px; stroke-width: 3; }
+.train-card__content { padding: 20px 18px 18px; display: flex; flex-direction: column; gap: 16px; }
+.train-card__name { font-size: var(--fs-xl); }
+.train-card__stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 0; }
+.train-card__stat { padding: 12px 14px; border-radius: var(--r-inner); background: var(--porcelain); }
+.train-card__stat dt { font-size: var(--fs-xs); color: var(--ink-soft); font-weight: 650; }
+.train-card__stat dd { margin: 2px 0 0; font-size: var(--fs-lg); font-weight: 800; color: var(--wine); line-height: 1.2; word-break: break-word; }
+.train-card__notes {
+  display: flex; gap: 10px; font-size: var(--fs-sm); color: var(--ink-soft);
+  padding: 12px 14px; border-radius: var(--r-inner); background: var(--lilac-soft);
+}
+.train-card__notes svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--wine); }
+.train-card__tools { display: flex; gap: 8px; flex-wrap: wrap; }
+.train-card__tools .btn { flex: 1 1 auto; }
+
+.train-card.is-done { background: var(--porcelain); border-color: transparent; }
+.train-card.is-done .train-card__image img { filter: saturate(.3); opacity: .55; }
+.train-card.is-done .train-card__index { background: var(--wine); color: var(--blush); }
+.train-card.is-done .train-card__name { color: var(--ink-soft); }
+.train-card.is-done .train-card__stat { background: var(--white); }
+.train-card__done svg { stroke-width: 3; }
+.train-card.is-done .train-card__done { animation: pop .35s var(--ease); }
+@keyframes pop { 40% { transform: scale(1.03); } }
+
+/* ---------- Cronômetro de descanso ---------- */
+.rest-timer {
+  position: fixed; z-index: 60; left: 12px; right: 12px;
+  bottom: calc(12px + var(--safe-bottom));
+  max-width: 520px; margin: 0 auto;
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 12px 12px 20px; overflow: hidden;
+  border-radius: 24px; background: var(--wine); color: var(--blush);
+  box-shadow: var(--shadow-float);
+  animation: toast-in .35s var(--ease);
+}
+.rest-timer__bar {
+  position: absolute; inset: 0; transform-origin: left;
+  background: rgba(243, 227, 223, .12); transition: transform .25s linear; pointer-events: none;
+}
+.rest-timer__text { position: relative; flex: 1; display: flex; flex-direction: column; }
+.rest-timer__label { font-size: var(--fs-xs); opacity: .8; font-weight: 650; }
+.rest-timer__clock { font-family: var(--font-display); font-size: 34px; font-weight: 500; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.rest-timer__btn {
+  position: relative; display: inline-flex; align-items: center; gap: 4px;
+  height: 48px; padding: 0 16px; border: 0; border-radius: var(--r-pill);
+  background: rgba(243, 227, 223, .16); color: var(--blush); font-weight: 800;
+}
+.rest-timer__btn svg { width: 18px; height: 18px; }
+.rest-timer__btn--icon { width: 48px; padding: 0; justify-content: center; }
+.rest-timer.is-finished { background: var(--rose-deep); }
